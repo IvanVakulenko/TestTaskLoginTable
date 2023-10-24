@@ -415,7 +415,7 @@ const TableView = () => {
         ))}
       </div>
       <div>
-        <p className="text-center font-normal text-gray-500 mt-12">If error occured or for any other questions please</p>
+        <p className="text-center font-normal text-gray-500 mt-6">If error occured or for any other questions please</p>
         <h2 className="text-2xl font-extrabold text-center mt-3 mb-6">
               <Link to='https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1'>
                   <span className="bg-clip-text motion-safe:animate-spin text-transparent bg-gradient-to-r from-blue-500 to-red-500" >Contact Us</span>
