@@ -1,10 +1,41 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import { Link } from "react-router-dom";
-import { enqueueSnackbar } from "notistack";
-
+import { useSnackbar } from "notistack";
 
 const testUsersData = [
+  {
+    "id": 1,
+    "name": "John Doe",
+    "email": "john.doe@example.com",
+    "birthday_date": "1990-05-15",
+    "phone_number": "+1 (123) 456-7890",
+    "address": "123 Main St, City, Country"
+  },
+  {
+    "id": 2,
+    "name": "Jane Smith",
+    "email": "jane.smith@example.com",
+    "birthday_date": "1985-10-20",
+    "phone_number": "+1 (987) 654-3210",
+    "address": "456 Elm St, Town, Country"
+  },
+  {
+      "id": 1,
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "birthday_date": "1990-05-15",
+      "phone_number": "+1 (123) 456-7890",
+      "address": "123 Main St, City, Country"
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "email": "jane.smith@example.com",
+      "birthday_date": "1985-10-20",
+      "phone_number": "+1 (987) 654-3210",
+      "address": "456 Elm St, Town, Country"
+    },
     {
       "id": 1,
       "name": "John Doe",
@@ -22,180 +53,144 @@ const testUsersData = [
       "address": "456 Elm St, Town, Country"
     },
     {
-        "id": 1,
-        "name": "John Doe",
-        "email": "john.doe@example.com",
-        "birthday_date": "1990-05-15",
-        "phone_number": "+1 (123) 456-7890",
-        "address": "123 Main St, City, Country"
-      },
-      {
-        "id": 2,
-        "name": "Jane Smith",
-        "email": "jane.smith@example.com",
-        "birthday_date": "1985-10-20",
-        "phone_number": "+1 (987) 654-3210",
-        "address": "456 Elm St, Town, Country"
-      },
-      {
-        "id": 1,
-        "name": "John Doe",
-        "email": "john.doe@example.com",
-        "birthday_date": "1990-05-15",
-        "phone_number": "+1 (123) 456-7890",
-        "address": "123 Main St, City, Country"
-      },
-      {
-        "id": 2,
-        "name": "Jane Smith",
-        "email": "jane.smith@example.com",
-        "birthday_date": "1985-10-20",
-        "phone_number": "+1 (987) 654-3210",
-        "address": "456 Elm St, Town, Country"
-      },
-      {
-        "id": 1,
-        "name": "John Doe",
-        "email": "john.doe@example.com",
-        "birthday_date": "1990-05-15",
-        "phone_number": "+1 (123) 456-7890",
-        "address": "123 Main St, City, Country"
-      },
-      {
-        "id": 2,
-        "name": "Jane Smith",
-        "email": "jane.smith@example.com",
-        "birthday_date": "1985-10-20",
-        "phone_number": "+1 (987) 654-3210",
-        "address": "456 Elm St, Town, Country"
-      },
-      {
-        "id": 1,
-        "name": "John Doe",
-        "email": "john.doe@example.com",
-        "birthday_date": "1990-05-15",
-        "phone_number": "+1 (123) 456-7890",
-        "address": "123 Main St, City, Country"
-      },
-      {
-        "id": 2,
-        "name": "Jane Smith",
-        "email": "jane.smith@example.com",
-        "birthday_date": "1985-10-20",
-        "phone_number": "+1 (987) 654-3210",
-        "address": "456 Elm St, Town, Country"
-      },
-      {
-        "id": 1,
-        "name": "John Doe",
-        "email": "john.doe@example.com",
-        "birthday_date": "1990-05-15",
-        "phone_number": "+1 (123) 456-7890",
-        "address": "123 Main St, City, Country"
-      },
-      {
-        "id": 2,
-        "name": "Jane Smith",
-        "email": "jane.smith@example.com",
-        "birthday_date": "1985-10-20",
-        "phone_number": "+1 (987) 654-3210",
-        "address": "456 Elm St, Town, Country"
-      },
-      {
-        "id": 1,
-        "name": "John Doe",
-        "email": "john.doe@example.com",
-        "birthday_date": "1990-05-15",
-        "phone_number": "+1 (123) 456-7890",
-        "address": "123 Main St, City, Country"
-      },
-      {
-        "id": 2,
-        "name": "Jane Smith",
-        "email": "jane.smith@example.com",
-        "birthday_date": "1985-10-20",
-        "phone_number": "+1 (987) 654-3210",
-        "address": "456 Elm St, Town, Country"
-      },
-      {
-        "id": 1,
-        "name": "John Doe",
-        "email": "john.doe@example.com",
-        "birthday_date": "1990-05-15",
-        "phone_number": "+1 (123) 456-7890",
-        "address": "123 Main St, City, Country"
-      },
-      {
-        "id": 2,
-        "name": "Jane Smith",
-        "email": "jane.smith@example.com",
-        "birthday_date": "1985-10-20",
-        "phone_number": "+1 (987) 654-3210",
-        "address": "456 Elm St, Town, Country"
-      },
-      {
-        "id": 1,
-        "name": "John Doe",
-        "email": "john.doe@example.com",
-        "birthday_date": "1990-05-15",
-        "phone_number": "+1 (123) 456-7890",
-        "address": "123 Main St, City, Country"
-      },
-      {
-        "id": 2,
-        "name": "Jane Smith",
-        "email": "jane.smith@example.com",
-        "birthday_date": "1985-10-20",
-        "phone_number": "+1 (987) 654-3210",
-        "address": "456 Elm St, Town, Country"
-      },
-      {
-        "id": 1,
-        "name": "John Doe",
-        "email": "john.doe@example.com",
-        "birthday_date": "1990-05-15",
-        "phone_number": "+1 (123) 456-7890",
-        "address": "123 Main St, City, Country"
-      },
-      {
-        "id": 2,
-        "name": "Jane Smith",
-        "email": "jane.smith@example.com",
-        "birthday_date": "1985-10-20",
-        "phone_number": "+1 (987) 654-3210",
-        "address": "456 Elm St, Town, Country"
-      },
-      {
-        "id": 1,
-        "name": "John Doe",
-        "email": "john.doe@example.com",
-        "birthday_date": "1990-05-15",
-        "phone_number": "+1 (123) 456-7890",
-        "address": "123 Main St, City, Country"
-      },
-      {
-        "id": 2,
-        "name": "Jane Smith",
-        "email": "jane.smith@example.com",
-        "birthday_date": "1985-10-20",
-        "phone_number": "+1 (987) 654-3210",
-        "address": "456 Elm St, Town, Country"
-      },
-  ];
+      "id": 1,
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "birthday_date": "1990-05-15",
+      "phone_number": "+1 (123) 456-7890",
+      "address": "123 Main St, City, Country"
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "email": "jane.smith@example.com",
+      "birthday_date": "1985-10-20",
+      "phone_number": "+1 (987) 654-3210",
+      "address": "456 Elm St, Town, Country"
+    },
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "birthday_date": "1990-05-15",
+      "phone_number": "+1 (123) 456-7890",
+      "address": "123 Main St, City, Country"
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "email": "jane.smith@example.com",
+      "birthday_date": "1985-10-20",
+      "phone_number": "+1 (987) 654-3210",
+      "address": "456 Elm St, Town, Country"
+    },
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "birthday_date": "1990-05-15",
+      "phone_number": "+1 (123) 456-7890",
+      "address": "123 Main St, City, Country"
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "email": "jane.smith@example.com",
+      "birthday_date": "1985-10-20",
+      "phone_number": "+1 (987) 654-3210",
+      "address": "456 Elm St, Town, Country"
+    },
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "birthday_date": "1990-05-15",
+      "phone_number": "+1 (123) 456-7890",
+      "address": "123 Main St, City, Country"
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "email": "jane.smith@example.com",
+      "birthday_date": "1985-10-20",
+      "phone_number": "+1 (987) 654-3210",
+      "address": "456 Elm St, Town, Country"
+    },
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "birthday_date": "1990-05-15",
+      "phone_number": "+1 (123) 456-7890",
+      "address": "123 Main St, City, Country"
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "email": "jane.smith@example.com",
+      "birthday_date": "1985-10-20",
+      "phone_number": "+1 (987) 654-3210",
+      "address": "456 Elm St, Town, Country"
+    },
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "birthday_date": "1990-05-15",
+      "phone_number": "+1 (123) 456-7890",
+      "address": "123 Main St, City, Country"
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "email": "jane.smith@example.com",
+      "birthday_date": "1985-10-20",
+      "phone_number": "+1 (987) 654-3210",
+      "address": "456 Elm St, Town, Country"
+    },
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "birthday_date": "1990-05-15",
+      "phone_number": "+1 (123) 456-7890",
+      "address": "123 Main St, City, Country"
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "email": "jane.smith@example.com",
+      "birthday_date": "1985-10-20",
+      "phone_number": "+1 (987) 654-3210",
+      "address": "456 Elm St, Town, Country"
+    },
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "birthday_date": "1990-05-15",
+      "phone_number": "+1 (123) 456-7890",
+      "address": "123 Main St, City, Country"
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "email": "jane.smith@example.com",
+      "birthday_date": "1985-10-20",
+      "phone_number": "+1 (987) 654-3210",
+      "address": "456 Elm St, Town, Country"
+    },
+];
 
 const TableView = () => {
     const [showMore, setShowMore] = useState(10);
 
     const [loading, setLoading] = useState(false);
-    const [tableData, setTableData] = useState({
-      name: '',
-      email: '',
-      birthday_date: '',
-      phone_number: '',
-      address: '',
-    });
+    const [tableData, setTableData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [perPage] = useState(10); 
+
+    const { enqueueSnackbar } = useSnackbar();
 
     useEffect(() => {
         setLoading(true);
@@ -209,15 +204,14 @@ const TableView = () => {
             console.log(error);
             setLoading(false);
           });
-      }, []);
+    }, []);
 
     const [editableData, setEditableData] = useState({}); 
     const [updatedData, setUpdatedData] = useState({}); 
 
     const indexOfLastData = currentPage * perPage;
     const indexOfFirstData = indexOfLastData - perPage;
-    // const currentData = tableData.slice(indexOfFirstData, indexOfLastData);
-    const currentData = testUsersData.slice(indexOfFirstData, indexOfLastData);
+    const currentData = tableData.slice(indexOfFirstData, indexOfLastData);
   
     const paginate = (pageNumber) => {
       setCurrentPage(pageNumber);
@@ -230,30 +224,24 @@ const TableView = () => {
     const handleSave = (id) => {
       setLoading(true);
       axios
-        .put(`http://146.190.118.121/api/table/${id}`, tableData)
+        .put(`http://146.190.118.121/api/table/${id}`, updatedData[id])
         .then(() => {
           setLoading(false);
           enqueueSnackbar('Data Edited successfully', { variant: 'success' });
+          setEditableData({ ...editableData, [id]: false });
         })
         .catch((error) => {
           setLoading(false);
           enqueueSnackbar('An error occurred. Please check the console', { variant: 'error' });
           console.error('Error editing:', error);
         });
-
-        setEditableData({ ...editableData, [id]: false });
     };
 
     const handleChange = (id, fieldName, value) => {
         setUpdatedData({ ...updatedData, [id]: { ...updatedData[id], [fieldName]: value } });
     };
 
-    // const loadMore = () => {
-    //     setShowMore((prevShowMore) => prevShowMore + 10); 
-    // };
-
-    const displayedData = testUsersData.slice(0, showMore);
-    // const displayedData = tableData.slice(0, showMore);
+    const displayedData = tableData.slice(0, showMore);
 
     if (loading) {
         return (
@@ -269,21 +257,41 @@ const TableView = () => {
     }
 
     if (!displayedData || displayedData.length === 0) {
-        return (
+      return (
         <div className="bg-gray-100 min-h-screen flex flex-col p-10 rounded-lg shadow-2xl w-30">
-            <h2 className="text-4xl font-extrabold text-start mb-6">
-                <Link to='/'>
-                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-500 to-red-500" >Table.io</span>
-                </Link> 
+          <h2 className="text-4xl font-extrabold text-start mb-6">
+            <Link to='/'>
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-500 to-red-500">Table.io</span>
+            </Link>
+          </h2>
+          <div className="text-4xl text-center px-6 py-3 p-10 text-gray-700">No data available.</div>
+          <div>
+            <p className="text-center font-normal text-gray-500 mt-6">If an error occurred or for any other questions please</p>
+            <h2 className="text-2xl font-extrabold text-center mt-3 mb-6">
+              <Link to='/'>
+                <span className="bg-clip-text motion-safe:animate-spin text-transparent bg-gradient-to-r from-blue-500 to-red-500">Contact Us</span>
+              </Link>
             </h2>
-            <div className="text-4xl text-center px-6 py-3 p-10 text-gray-700">No data available.</div>
+          </div>
+          <div className="text-center">
+            <button
+              onClick={() => {
+                // Handle the display of test data here
+                setTableData(testUsersData);
+              }}
+              className="bg-blue-500 text-white px-12 py-4 rounded mt-4 hover:bg-blue-600 duration-300"
+            >
+              Display Test Data
+            </button>
+          </div>
+          
         </div>
-        )
+      );
     }
+    
 
     return (
         <>
-        
         <div className="bg-gray-100 min-h-screen flex flex-col p-10 rounded-lg shadow-2xl w-30">
         <h2 className="text-4xl font-extrabold text-start mb-6">
             <Link to='/'>
@@ -402,7 +410,7 @@ const TableView = () => {
         </table>
       </div>
       <div className="flex justify-center mt-4">
-        {Array.from({ length: Math.ceil(testUsersData.length / perPage) }, (_, index) => (
+        {Array.from({ length: Math.ceil(tableData.length / perPage) }, (_, index) => (
           <button
             key={index}
             onClick={() => paginate(index + 1)}
@@ -415,9 +423,9 @@ const TableView = () => {
         ))}
       </div>
       <div>
-        <p className="text-center font-normal text-gray-500 mt-6">If error occured or for any other questions please</p>
+        <p className="text-center font-normal text-gray-500 mt-6">If an error occurred or for any other questions please</p>
         <h2 className="text-2xl font-extrabold text-center mt-3 mb-6">
-              <Link to='https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1'>
+              <Link to='/'>
                   <span className="bg-clip-text motion-safe:animate-spin text-transparent bg-gradient-to-r from-blue-500 to-red-500" >Contact Us</span>
               </Link> 
           </h2>
@@ -426,7 +434,5 @@ const TableView = () => {
     </>
     );
 };
-
-
 
 export default TableView;

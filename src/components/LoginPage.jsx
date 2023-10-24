@@ -31,7 +31,6 @@ const LoginPage = () => {
       
         setLoading(true);
       
-        // Тут ви можете виконати перевірку логіну та пароля на клієнтській стороні
         if (name === loginConfig.name && password === loginConfig.password) {
           setLoading(false);
           enqueueSnackbar("User logged in successfully", { variant: "success" });
